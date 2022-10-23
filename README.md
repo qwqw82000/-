@@ -541,3 +541,107 @@ required -> 값이 채워지지 않으면 제출을 할 수 없음
 <!-- 이번 시험은 선택목록까지 -->
 ```
 
+과제
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>회원가입</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+    <form action="quiz.jsp" method="post">
+        <h3>▶ 회원가입</h3>
+        <table border="1">
+            <tr>
+                <td>*아이디:</td>
+                <td><input type = "text" name = "ID" size = "15" maxlength = "12" required></td>
+            </tr>
+            <tr>
+                <td>*이름:</td>
+                <td><input type = "text" name = "name" size = "15" maxlength = "12" required></td>
+            </tr>
+            <tr>
+                <td>*비밀번호:</td>
+                <td><input type = "password" name = "PSW" size = "15" maxlength = "12" placeholder="암호 입력" required></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td>
+                    <input type = "radio" name = "gender" value="남성" checked> 남성
+                    <input type = "radio" name = "gender" value="여성" > 여성
+                </td>
+            </tr>
+            <tr>
+                <td>나이</td>
+                <td><input type="number" name="age" min="1" max="130"></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td><input type="email" name="myemail"></td>
+            </tr>
+            <tr>
+                <td>취미</td>
+                <td>
+                    <input type="checkbox" name="habit" value="등산" checked>등산
+                    <input type="checkbox" name="habit" value="운동" > 운동
+                    <input type="checkbox" name="habit" value="독서" >독서
+                    <input type="checkbox" name="habit" value="영화감상" >영화감상
+                </td>
+            </tr>
+            <tr>
+                <td>자기소개</td>
+                <td><textarea name="intro" rows="5" cols="50">여러분 반갑습니다</textarea></td>
+            </tr>
+            <tr align = "center">
+                <td colspan="3" ><input type="submit" value="확인">
+                <input type="reset" value="다시작성"></td>
+            </tr>
+        </table>
+
+        <p></p>
+    </form>
+</body>
+
+</html>
+```
+
+```jsp
+<%@page language = "java" contentType = "text/html; charset=utf-8" pageEncoding = "utf-8" %>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>회원가입</title>
+</head>
+<body>
+    <h3>▶ 회원가입 내용 ◀</h3><hr/>
+
+    <!-- JSP문법 작성 -->
+    <%
+        request.setCharacterEncoding("utf-8");
+        String StrID = request.getParameter("ID");
+        String StrName = request.getParameter("name");
+        String StrPSW = request.getParameter("PSW");
+        String StrGender = request.getParameter("gender");
+        String StrAge = request.getParameter("age");
+        String StrMyemail = request.getParameter("myemail");
+        String[] StrHabit = request.getParameterValues("habit");
+        String StrIntro = request.getParameter("intro");
+        out.println("아이디 :" +StrID + "</br>");
+        out.println("이름 :" +StrName + "</br>");
+        out.println("패스워드 :" +StrPSW + "</br>");
+        out.println("성별 :" +StrGender + "</br>");
+        out.println("나이 :" +StrAge + "세" + "</br>");
+        out.println("이메일 :" +StrMyemail + "</br>");
+        out.println("취미 :");
+
+        for(String value : StrHabit){
+            out.println(value + " / ");
+        }
+        out.println("</br>" + "자기소개 :" +StrIntro);
+    %>
+</body>
+</html>
+<!-- localhost:8080/select.html -->
+```
